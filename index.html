@@ -19,18 +19,19 @@
 
         nav {
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             background-color: white;
             padding: 0.5rem 1rem;
-            
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .logo {
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            margin-right: 1rem;
+        .navbar-brand img {   
+            height: 50px;
+            width: 300px;
         }
 
         .menu {
@@ -46,7 +47,65 @@
 
         .menu a:hover {
             background-color: #fdc9d6;
+            border-radius: 4px;
         }
+        /* ===== MENU RESPONSIVO ===== */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 25px;
+            width: 35px;
+            cursor: pointer;
+        }
+
+        .menu-toggle div {
+            width: 100%;
+            height: 4px;
+            background-color: #5e2590;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                z-index: 999;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu.active {
+                display: flex;
+            }
+
+            .menu a {
+                padding: 1rem;
+                text-align: center;
+                border-bottom: 1px solid #f1f1f1;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+        }
+
+        /* Ajustar espacio para el botón flotante */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.5rem;
+            }
+
+            .navbar-brand img {
+                max-width: 300px;
+                height: auto;
+            }
+        }
+
 
         main {
             padding: 2rem;
@@ -219,11 +278,35 @@
             animation: bounceIn 0.8s ease-in-out;
         }
 
-        .boton {
+        .container-boton img.boton {
             width: 42px;
             height: 42px;
         }
+        @media (max-width: 768px) {
+            .container-boton {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px;
+            }
 
+            .container-boton img.boton {
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+            /* Adaptación a móviles */
+        @media (max-width: 480px) {
+            .container-boton {
+                bottom: 10px;
+                right: 10px;
+                padding: 10px;
+            }
+            .container-boton img.boton {
+                width: 30px;
+                height: 30px;
+            }
+        }
         @keyframes bounceIn {
             0% {
                 transform: translateY(100px);
@@ -358,8 +441,28 @@
             margin-top: 10px;
             font-weight: bolder;
         }
-        .espacio{
-            padding-bottom: px;
+        
+        .info-logo {
+            width: 550px; /* No supera el ancho de su contenedor */
+            height: 95px; /* Mantiene la proporción de la imagen */
+            display: block; /* Elimina espacios no deseados debajo de la imagen */
+            margin: 0 auto 20px; /* Centra horizontalmente y añade espacio inferior */
+        }
+
+        /* Ajuste para Tablets */
+        @media (max-width: 768px) {
+            .info-logo {
+                max-width: 70%; /* Reduce al 70% para una mejor adaptación */
+                height: auto;
+            }
+        }
+
+        /* Ajuste para Móviles */
+        @media (max-width: 480px) {
+            .info-logo {
+                max-width: 90%; /* Reduce al 90% para mejor visibilidad */
+                height: auto;
+            }
         }
         
         
@@ -367,9 +470,16 @@
 </head>
 <body>
     <nav>
-        <a class="navbar-brand" href="cytotec.html"><img src="imagenes/logo.png" height="50px" width="300px" ></a>
+        <a class="navbar-brand" href="index.html">
+            <img src="imagenes/logo.png" alt="Logo">
+        </a>
+        <div class="menu-toggle" id="menu-toggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
         <div class="menu">
-            <a href="cytotec.html">Menú </a>
+            <a href="cytotec.html">Menú</a>
             <a href="https://wa.me/3177440016" target="_blank">Contáctanos</a>
         </div>
     </nav>
@@ -461,8 +571,7 @@
 
        
         <section class="info-section">
-            <img src="imagenes/logo.png" alt="logo" width="500px" height="95px">
-          
+            <img src="imagenes/logo.png" alt="logo" class="info-logo">
             <div class="info-container">
                 <div class="info-box">
                     <h3>¿Que es Cytotec?</h3>
@@ -538,6 +647,16 @@
                         $button.removeClass('hidden').addClass('visible');
                     }
                 }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuToggle = document.getElementById('menu-toggle');
+            const menu = document.querySelector('.menu');
+    
+            menuToggle.addEventListener('click', function () {
+                menu.classList.toggle('active');
             });
         });
     </script>
